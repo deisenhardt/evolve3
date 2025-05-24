@@ -64,6 +64,8 @@ word="zsh nala terminator notepadqq tuxcmd doublecmd-gtk mc atop btop htop caffe
 
 input_check $@
 
+sudo apt-get update
+
 sudo apt-get -y install "$word"
 
 if "$evolve" -eq 1 ]; then
