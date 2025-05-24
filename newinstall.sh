@@ -37,23 +37,23 @@ input_check() {
     echo "$1" | grep h && help=1
   fi
 
-  if [ "$help" -eq 1 ]; then
+  if [[ "$help" -eq 1 ]]; then
     usage
   fi
 
-  if [ "$radio" -eq 1 ]; then
+  if [[ "$radio" -eq 1 ]]; then
     word+=" hamradio-all"
   fi
 
-  if [ "$chrome" -eq 1 ]; then
+  if [[ "$chrome" -eq 1 ]]; then
     word+=" google-chrome-stable"
   fi
 
-  if [ "$discord" -eq 1 ]; then
+  if [[ "$discord" -eq 1 ]]; then
     word+=" discord"
   fi
 
-  if [ "$xfce" -eq 1 ]; then
+  if [[ "$xfce" -eq 1 ]]; then
     word+=" xfce4 xfce4-goodiesxfwm4"
   fi
 }
