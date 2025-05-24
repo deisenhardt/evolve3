@@ -68,6 +68,6 @@ sudo apt-get update
 
 sudo apt-get -y install "$word"
 
-if "$evolve" -eq 1 ]; then
+if [ "$evolve" -eq 1 ]; then
   maestro_evolve $@
 fi
