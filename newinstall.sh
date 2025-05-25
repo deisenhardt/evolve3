@@ -10,6 +10,7 @@ usage(){
         \n\t -g install Google Chrome \
         \n\t -d install Discord \
         \n\t -x install XFCE & goodies \
+        \n\n\t -h display this help message \
         \n\n core packages: \
         \n "$list" \
         \n\n"
@@ -24,15 +25,15 @@ sudo_check(){
   fi
 }
 
-input_check() { # check 2 words use word 1 for flags
-  #if [[ $# -ge 1 ]]; then
-    echo "$1" | grep e && evolve=1
-    echo "$1" | grep r && radio=1
-    echo "$1" | grep g && chrome=1
-    echo "$1" | grep d && discord=1
-    echo "$1" | grep x && xfce=1
-    echo "$1" | grep h && help=1
-  #fi
+input_check() { # check for flags
+  if [[ echo "$1" | grep "-" ]]; then
+    echo "$1" | grep -i "e" && evolve=1
+    echo "$1" | grep -i "r" && radio=1
+    echo "$1" | grep -i "g" && chrome=1
+    echo "$1" | grep -i "d" && discord=1
+    echo "$1" | grep -i "x" && xfce=1
+    echo "$1" | grep -i "h" && help=1
+  fi
 
   if [[ "$help" -eq 1 ]]; then
     usage
