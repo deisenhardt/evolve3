@@ -56,10 +56,20 @@ input_check() { # check for flags
 }
 
 maestro_evolve() { # Commands to install new drivers (make sure secure boot is disabled):
-  sudo add-apt-repository ppa:kelebek333/kablosuz
-  sudo apt-get update
-  sudo apt-get install -y rtl8723du-dkms
-  sudo reboot now
+
+  # ubuntu PPA
+  #sudo add-apt-repository ppa:kelebek333/kablosuz
+  #sudo apt-get update
+  #sudo apt-get install -y rtl8723du-dkms
+  #sudo reboot now
+
+  # debian
+  sudo apt-get -y install linux-headers-$(uname -r) build-essential git
+  git clone https://github.com/lwfinger/rtw88
+  cd rtw88
+  make
+  sudo make install
+  sudo make install_fw
 }
 
 list="zsh nala terminator notepadqq tuxcmd doublecmd-gtk mc atop btop htop caffeine neofetch 7zip"
