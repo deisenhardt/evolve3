@@ -10,7 +10,7 @@ usage(){
         \n\t -g install Google Chrome \
         \n\t -d install Discord \
         \n\t -x install XFCE & goodies \
-        \n\n core packages: 
+        \n\n core packages: \
         \n "$list" \
         \n\n"
   exit 1
@@ -25,14 +25,14 @@ sudo_check(){
 }
 
 input_check() { # check 2 words use word 1 for flags
-  if [ $# -ge 1 ]; then
+  #if [[ $# -ge 1 ]]; then
     echo "$1" | grep e && evolve=1
     echo "$1" | grep r && radio=1
     echo "$1" | grep g && chrome=1
     echo "$1" | grep d && discord=1
     echo "$1" | grep x && xfce=1
     echo "$1" | grep h && help=1
-  fi
+  #fi
 
   if [[ "$help" -eq 1 ]]; then
     usage
@@ -72,10 +72,10 @@ input_check $@
 
 sudo apt-get update
 
-if [ "$evolve" -eq 1 ]; then
+if [[ "$evolve" -eq 1 ]]; then
   maestro_evolve $@
 else
-  for package in "$list" do; 
+  for package in $list do;
     sudo apt-get -y install "$package"
   done
 fi
