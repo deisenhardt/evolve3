@@ -26,34 +26,33 @@ sudo_check(){
 }
 
 input_check() { # check for flags
-  if [[ echo "$1" | grep "-" ]]; then
+
     echo "$1" | grep -i "e" && evolve=1
-    echo "$1" | grep -i "r" && radio=1
-    echo "$1" | grep -i "g" && chrome=1
-    echo "$1" | grep -i "d" && discord=1
-    echo "$1" | grep -i "x" && xfce=1
-    echo "$1" | grep -i "h" && help=1
-  fi
+    echo "$1" | grep -i "r" && radio=1   && list+=" hamradio-all"
+    echo "$1" | grep -i "g" && chrome=1  && list+=" google-chrome-stable"
+    echo "$1" | grep -i "d" && discord=1 && list+=" discord"
+    echo "$1" | grep -i "x" && xfce=1    && list+=" xfce4 xfce4-goodies xfwm4 xfce4-whiskermenu-plugin"
+    echo "$1" | grep -i "h" && help=1    && usage
 
-  if [[ "$help" -eq 1 ]]; then
-    usage
-  fi
+  #if [[ "$help" -eq 1 ]]; then
+  #  usage
+  #fi
 
-  if [[ "$radio" -eq 1 ]]; then
-    list+=" hamradio-all"
-  fi
+  #if [[ "$radio" -eq 1 ]]; then
+  #  list+=" hamradio-all"
+  #fi
 
-  if [[ "$chrome" -eq 1 ]]; then
-    list+=" google-chrome-stable"
-  fi
+  #if [[ "$chrome" -eq 1 ]]; then
+  #  list+=" google-chrome-stable"
+  #fi
 
-  if [[ "$discord" -eq 1 ]]; then
-    list+=" discord"
-  fi
+  #if [[ "$discord" -eq 1 ]]; then
+  #  list+=" discord"
+  #fi
 
-  if [[ "$xfce" -eq 1 ]]; then
-    list+=" xfce4 xfce4-goodies xfwm4 xfce4-whiskermenu-plugin"
-  fi
+  #if [[ "$xfce" -eq 1 ]]; then
+  #  list+=" xfce4 xfce4-goodies xfwm4 xfce4-whiskermenu-plugin"
+  #fi
 }
 
 maestro_evolve() { # Commands to install new drivers (make sure secure boot is disabled):
@@ -63,7 +62,7 @@ maestro_evolve() { # Commands to install new drivers (make sure secure boot is d
   sudo reboot now
 }
 
-list="zsh nala terminator notepadqq tuxcmd doublecmd-gtk mc atop btop htop caffeine neofetch"
+list="zsh nala terminator notepadqq tuxcmd doublecmd-gtk mc atop btop htop caffeine neofetch 7zip"
 
 # main
 
