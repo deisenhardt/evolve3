@@ -11,23 +11,20 @@ usage(){
         \n\t -d install Discord \
         \n\t -x install XFCE & goodies \
         \n\n core packages: 
-        \n "$word" \
+        \n "$list" \
         \n\n"
   exit 1
 }
 
-maestro_evolve() {
-  # Commands to install new drivers (make sure secure boot is disabled):
-  sudo add-apt-repository ppa:kelebek333/kablosuz
-  sudo apt-get update
-  sudo apt-get install -y rtl8723du-dkms
-  sudo reboot now
+sudo_check(){
+  id -u | grep -w "^0" || check_fail=1
+  if [[ "$check_fail" -eq 1 ]]; then
+    printf "\n\n Must be run as sudo or root. Please try again. Exiting. \n\n"
+    exit 1
+  fi
 }
 
-input_check() {
-  
-  
-  # check 2 words use word 1 for flags
+input_check() { # check 2 words use word 1 for flags
   if [ $# -ge 1 ]; then
     echo "$1" | grep e && evolve=1
     echo "$1" | grep r && radio=1
@@ -42,32 +39,43 @@ input_check() {
   fi
 
   if [[ "$radio" -eq 1 ]]; then
-    word+=" hamradio-all"
+    list+=" hamradio-all"
   fi
 
   if [[ "$chrome" -eq 1 ]]; then
-    word+=" google-chrome-stable"
+    list+=" google-chrome-stable"
   fi
 
   if [[ "$discord" -eq 1 ]]; then
-    word+=" discord"
+    list+=" discord"
   fi
 
   if [[ "$xfce" -eq 1 ]]; then
-    word+=" xfce4 xfce4-goodiesxfwm4"
+    list+=" xfce4 xfce4-goodies xfwm4 xfce4-whiskermenu-plugin"
   fi
 }
 
-word="zsh nala terminator notepadqq tuxcmd doublecmd-gtk mc atop btop htop caffeine"
+maestro_evolve() { # Commands to install new drivers (make sure secure boot is disabled):
+  sudo add-apt-repository ppa:kelebek333/kablosuz
+  sudo apt-get update
+  sudo apt-get install -y rtl8723du-dkms
+  sudo reboot now
+}
+
+list="zsh nala terminator notepadqq tuxcmd doublecmd-gtk mc atop btop htop caffeine neofetch"
 
 # main
+
+sudo_check
 
 input_check $@
 
 sudo apt-get update
 
-sudo apt-get -y install "$word"
-
 if [ "$evolve" -eq 1 ]; then
   maestro_evolve $@
+else
+  for package in "$list" do; 
+    sudo apt-get -y install "$package"
+  done
 fi
