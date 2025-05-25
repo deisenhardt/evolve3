@@ -76,6 +76,6 @@ if [[ "$evolve" -eq 1 ]]; then
   maestro_evolve $@
 else
   for package in $list do;
-    sudo apt-get -y install "$package"
+    sudo apt-get -y install $package
   done
 fi
